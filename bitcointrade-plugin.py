@@ -31,8 +31,8 @@ def getsign(data,secret):
 
 def httpPostWithSign(url, cmds, api_key):
     headers = {
-        'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6'
-        'x-api-key':'U2FsdGVkX1+Zqal3Ycmn9GR6gU0LRk9AHCONHRleqpM='
+        'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6',
+        'x-api-key':api_key
         }
     s_cmds = json.dumps(cmds)
     req = urllib2.Request(url, urllib.urlencode({'cmds': s_cmds}), headers=headers)
