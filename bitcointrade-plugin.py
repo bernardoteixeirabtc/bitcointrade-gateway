@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 '''
 BitcoinTrade Python2.7
@@ -145,12 +146,12 @@ class Server(BaseHTTPRequestHandler):
         sent_data = {}
         if data['method'] == "cancel":
             access_key = data["access_key"]
-            orders_id = int(data['params']['id'])
+            orders_id = data['params']['id']
             sent_data = MyExchange.CancelOrder(access_key, orders_id)
         elif data['method'] == "order":
             access_key = data["access_key"]
             secret_key = data["secret_key"]
-            orders_id = int(data['params']['id'])
+            orders_id = data['params']['id']
             sent_data = MyExchange.GetOrder(access_key, secret_key, orders_id)
         elif data['method'] == "orders":
             access_key = data["access_key"]
