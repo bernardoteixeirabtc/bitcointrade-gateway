@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 '''
 BitcoinTrade Python2.7
@@ -37,6 +36,7 @@ def httpPostWithSign(url, cmds, api_key):
         }
     s_cmds = json.dumps(cmds)
     req = urllib2.Request(url, urllib.urlencode({'cmds': s_cmds}), headers=headers)
+    req.get_method = lambda: 'DELETE' 
     response = urllib2.urlopen(req)
     return json.loads(response.read())
 
