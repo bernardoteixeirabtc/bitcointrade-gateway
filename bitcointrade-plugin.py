@@ -29,13 +29,12 @@ def getsign(data,secret):
     result = hmac.new(secret.encode("utf-8"), data.encode("utf-8"), hashlib.md5).hexdigest()
     return result
 
-def httpPostWithSign(url, cmds, api_key):
+def httpPostWithSign(url, body, api_key):
     headers = {
         'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6',
         'x-api-key':api_key
         }
-    s_cmds = json.dumps(cmds)
-    req = urllib2.Request(url, urllib.urlencode({'cmds': s_cmds}), headers=headers)
+    req = urllib2.Request(url, urllib.urlencode(body), headers=headers)
     req.get_method = lambda: 'DELETE' 
     response = urllib2.urlopen(req)
     return json.loads(response.read())
@@ -46,10 +45,8 @@ class MyExchange:
     @staticmethod
     def CancelOrder(api_key, orders_id):
         url = MyExchange.trade_url + "/market/user_orders"
-        cmds = [{
-                'body':{'id':orders_id}
-                }]
-        raw_data = httpPostWithSign(url, cmds, api_key)
+        body = {'id':orders_id}
+        raw_data = httpPostWithSign(url, body, api_key)
         if 'error' in raw_data.keys():
             return {'error':json.dumps(raw_data['error'],encoding="utf8", ensure_ascii=False)}
         ret_data = {"data":True}
