@@ -44,7 +44,7 @@ class MyExchange:
     trade_url = "https://api.bitcointrade.com.br/v3"
     @staticmethod
     def CancelOrder(api_key, orders_id):
-        url = MyExchange.trade_url + "/market/user_orders""
+        url = MyExchange.trade_url + "/market/user_orders"
         cmds = [{
                 'body':{'id':orders_id}
                 }]
